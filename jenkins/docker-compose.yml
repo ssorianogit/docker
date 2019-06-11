@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  jenkins:
+    container_name: jenkins
+    build:
+      context: .
+      dockerfile: jenkins.Dockerfile
+    image: jenkins
+    ports:
+      - '8080:8080'
+      - '50000:50000'
+    volumes:
+      - jenkins_home:/var/lib/jenkins
+
+  nginx:
+    container_name: jenkins-nginx
+    build:
+      context: .
+      dockerfile: nginx.Dockerfile
+    image: jenkins-nginx
+    ports:
+      - '80:80'
+      - '443:443'
+volumes:
+  jenkins_home:

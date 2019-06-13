@@ -3,7 +3,10 @@ version: '3'
 services:
   jenkins:
     container_name: jenkins
-    image: samuelsoriano/jenkins-master
+    build:
+      context: .
+      dockerfile: jenkins.Dockerfile
+    image: jenkins
     ports:
       - '8080:8080'
       - '50000:50000'
@@ -12,7 +15,10 @@ services:
 
   nginx:
     container_name: jenkins-nginx
-    image: samuelsoriano/jenkins-nginx
+    build:
+      context: .
+      dockerfile: nginx.Dockerfile
+    image: jenkins-nginx
     ports:
       - '80:80'
       - '443:443'
